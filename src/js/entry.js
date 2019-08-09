@@ -27,7 +27,7 @@ import store from './store'
 
 import Controller from './Controllers/Controller'
 import bcController from './Controllers/BCController'
-import {setTheme} from './actions'
+import { setTheme, timeoutPerformInteraction } from './actions'
 class HMIApp extends React.Component {
     constructor(props) {
         super(props);
@@ -35,12 +35,16 @@ class HMIApp extends React.Component {
             dark: true
         }
         this.handleClick = this.handleClick.bind(this);
-        this.sdl = new Controller(this.handleClick)
+        this.dismissInteraction = this.dismissInteraction.bind(this);
+        this.sdl = new Controller(this.handleClick, this.dismissInteraction)
     }
     handleClick(newState) {
         var theme = newState
         this.setState({ dark: theme})
         store.dispatch(setTheme(theme))
+    }
+    dismissInteraction() {
+        store.dispatch(timeoutPerformInteraction())
     }
     handleShutdown(){
         bcController.onIgnitionCycleOver()

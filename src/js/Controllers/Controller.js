@@ -12,9 +12,10 @@ import navController from './NavController'
 import {flags} from '../Flags';
 
 export default class Controller {
-    constructor (setThemeFunc) {
+    constructor (setThemeFunc, dismissInteractionFunc) {
         this.socket = null
         this.setTheme = setThemeFunc;
+        this.dismissInteraction = dismissInteractionFunc;
         bcController.addListener(this)
         uiController.addListener(this)
         sdlController.addListener(this)
@@ -166,6 +167,9 @@ export default class Controller {
         if (rpc.notRpc) { //handle custom messages coming from other HMIs
             if (rpc.type === "SET_THEME") {
                 this.setTheme(rpc.data.isDark);
+            }
+            if (rpc.type === "DISMISS_INTERACTION") {
+                this.dismissInteraction();
             }
             return;
         };
