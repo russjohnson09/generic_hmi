@@ -12,10 +12,9 @@ import navController from './NavController'
 import {flags} from '../Flags';
 
 export default class Controller {
-    constructor (setThemeFunc, dismissInteractionFunc) {
+    constructor (setThemeFunc) {
         this.socket = null
         this.setTheme = setThemeFunc;
-        this.dismissInteraction = dismissInteractionFunc;
         bcController.addListener(this)
         uiController.addListener(this)
         sdlController.addListener(this)
@@ -169,7 +168,7 @@ export default class Controller {
                 this.setTheme(rpc.data.isDark);
             }
             if (rpc.type === "DISMISS_INTERACTION") {
-                this.dismissInteraction();
+                uiController.onPerformInteractionTimeout(rpc.data.rpcID);
             }
             return;
         };
