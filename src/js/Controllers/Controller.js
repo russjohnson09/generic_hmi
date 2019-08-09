@@ -168,7 +168,7 @@ export default class Controller {
                 this.setTheme(rpc.data.isDark);
             }
             if (rpc.type === "DISMISS_INTERACTION") {
-                uiController.onPerformInteractionTimeout(rpc.data.rpcID);
+                uiController.onPerformInteractionTimeout(rpc.data.rpcID, rpc.data.appID);
             }
             return;
         };

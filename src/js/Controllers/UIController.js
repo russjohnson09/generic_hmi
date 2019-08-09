@@ -152,6 +152,8 @@ class UIController {
         }
     }
     onPerformInteractionTimeout(msgID, appID) {
+        console.log("testing")
+        console.log(msgID, appID)
         delete this.timers[msgID]
         this.listener.send(RpcFactory.VRPerformInteractionFailure(msgID-1))
         this.listener.send(RpcFactory.UIPerformInteractionFailure(msgID))
