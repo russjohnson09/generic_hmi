@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack-server": "webpack-dev-server --hot --progress --colors",
-    "web-server": "http-server -p 3000 .",
-    "start": "npm run webpack-server & npm run web-server"
+    "webpack-server": "webpack-dev-server --hot --progress --colors --port 8081",
+    "web-server": "http-server -p 4040 .",
+    "start": "npm run webpack-server & npm run web-server",
+    "build": "npm rebuild node-sass && webpack"
   },
+
   "author": "",
   "license": "ISC",
   "devDependencies": {

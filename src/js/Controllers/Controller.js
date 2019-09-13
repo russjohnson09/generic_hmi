@@ -1,4 +1,9 @@
-let url = "ws://localhost:8087"
+//TODO port in environment variables.
+let BROKER_PORT = 9001;
+let url = `ws://localhost:${BROKER_PORT}`;
+
+
+// let url = "ws://localhost:8087";
 let file_access_base_url = "";
 import bcController from './BCController';
 import uiController from './UIController';
@@ -10,6 +15,7 @@ import appServicesController from './AppServicesController';
 import externalPolicyManager from './ExternalPoliciesController';
 import navController from './NavController'
 import {flags} from '../Flags';
+console.log(`Controller`,url,process.env);
 
 export default class Controller {
     constructor () {
@@ -22,8 +28,12 @@ export default class Controller {
         appServicesController.addListener(this)
         // this.vrController = new VRController;
         // this.vehicleInfoController = new VehicleInfoController;
+
+        console.log(`Controller`,url);
     }
     connectToSDL() {
+        console.log(`Controller`,url);
+
         this.socket = new WebSocket(url)
         this.socket.onopen = this.onopen.bind(this)
         this.socket.onclose = this.onclose.bind(this)
@@ -121,7 +131,7 @@ export default class Controller {
         JSONMessage.params.componentName = "VehicleInfo";
         this.send(JSON.parse(JSON.stringify(JSONMessage)));
         JSONMessage.params.componentName = "AppService";
-        this.send(JSON.parse(JSON.stringify(JSONMessage)));        
+        this.send(JSON.parse(JSON.stringify(JSONMessage)));
         var ready = {
             "jsonrpc": "2.0",
             "method": "BasicCommunication.OnReady"
@@ -176,7 +186,7 @@ export default class Controller {
                     sdlController.handleRPCResponse(rpc);
                     break;
             }
-            
+
             return
         } else {
             return

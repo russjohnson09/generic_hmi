@@ -53,8 +53,20 @@ module.exports = {
         ]
     },
     plugins: [
-        getEnvironmentVariablesPlugin()
-    ]
+        getEnvironmentVariablesPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.BROKER_PORT': JSON.stringify(process.env.NODE_ENV || '9001')
+        }),
+    ],
+    "devServer": {
+        "historyApiFallback": true,
+        "watchOptions": { "aggregateTimeout": 300, "poll": 1000 },
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+            "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+        }
+    },
 };
 
 function getEnvironmentVariablesPlugin () {
