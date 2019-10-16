@@ -1,3 +1,7 @@
+#Minor Changes
+
+
+
 # Getting Started 
 
 ## Get an instance of SDL Core running
