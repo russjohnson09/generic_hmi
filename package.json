@@ -9,7 +9,6 @@
     "web-server": "http-server -p 3000 .",
     "start": "npm run webpack-server & npm run web-server",
     "build": "webpack"
-
   },
   "author": "",
   "license": "ISC",
