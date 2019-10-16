@@ -1,4 +1,9 @@
-let url = "ws://localhost:8087"
+//sdl_hmi/app/Flags.js
+
+//http://generic_hmi.localhost/?WEBSOCKET_URL=ws://192.168.1.57:8088
+//app tcp 192.168.1.57:12346
+
+
 let file_access_base_url = "";
 import bcController from './BCController';
 import uiController from './UIController';
@@ -24,7 +29,7 @@ export default class Controller {
         // this.vehicleInfoController = new VehicleInfoController;
     }
     connectToSDL() {
-        this.socket = new WebSocket(url)
+        this.socket = new WebSocket(flags.WEBSOCKET_URL);
         this.socket.onopen = this.onopen.bind(this)
         this.socket.onclose = this.onclose.bind(this)
         this.socket.onmessage = this.onmessage.bind(this)
@@ -121,7 +126,7 @@ export default class Controller {
         JSONMessage.params.componentName = "VehicleInfo";
         this.send(JSON.parse(JSON.stringify(JSONMessage)));
         JSONMessage.params.componentName = "AppService";
-        this.send(JSON.parse(JSON.stringify(JSONMessage)));        
+        this.send(JSON.parse(JSON.stringify(JSONMessage)));
         var ready = {
             "jsonrpc": "2.0",
             "method": "BasicCommunication.OnReady"
@@ -176,7 +181,7 @@ export default class Controller {
                     sdlController.handleRPCResponse(rpc);
                     break;
             }
-            
+
             return
         } else {
             return
